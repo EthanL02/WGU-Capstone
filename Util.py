@@ -1,4 +1,22 @@
+import collections
 import csv
+
+
+def dict_to_pairs(dct):
+    """
+    for each value associated to a key, create a pair
+
+    pairs = {(key i, val j), (key i, val j), (key i+1, val j+1), (key i+1, val j+1)...}
+
+    :return: pairs[]
+    """
+    pairs = []
+
+    for key in dct:
+        for item in dct[key]:
+            pairs.append((key, item))
+
+    return pairs
 
 
 def get_data_info():
@@ -6,6 +24,7 @@ def get_data_info():
     extract data from csv file into dictionaries
 
     returns 2 dictionaries respectively sorted by gpa and hours
+    dictionaries are sorted in ascending order by key
 
     :return: gpa_group{}, hour_group{}
     """
@@ -32,4 +51,4 @@ def get_data_info():
             else:
                 hour_group[hour].append(gpa)
 
-    return gpa_group, hour_group
+    return collections.OrderedDict(sorted(gpa_group.items())), collections.OrderedDict(sorted(hour_group.items()))
