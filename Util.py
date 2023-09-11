@@ -2,6 +2,13 @@ import csv
 
 
 def get_data_info():
+    """
+    extract data from csv file into dictionaries
+
+    returns 2 dictionaries respectively sorted by gpa and hours
+
+    :return: gpa_group{}, hour_group{}
+    """
     gpa_group = {}
     hour_group = {}
 
