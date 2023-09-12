@@ -19,6 +19,22 @@ def dict_to_pairs(dct):
     return pairs
 
 
+def get_xs(pairs):
+    xs = []
+
+    for pair in pairs:
+        xs.append(pair[0])
+    return xs
+
+
+def get_ys(pairs):
+    ys = []
+
+    for pair in pairs:
+        ys.append(pair[1])
+    return ys
+
+
 def get_data_info():
     """
     extract data from csv file into dictionaries

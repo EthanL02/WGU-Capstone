@@ -3,6 +3,8 @@ import matplotlib.pyplot as plot
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import messagebox
+import numpy as np
+
 
 def on_closing():
     if messagebox.askokcancel("Quit Program", "Do you want to quit?"):
@@ -15,7 +17,8 @@ window.state('zoomed')  # full-screen
 window.protocol("WM_DELETE_WINDOW", on_closing)
 
 # initialize Tkinter
-figure, ax = plot.subplots()
+plot.xticks(np.arange(0, 5, 1))
+figure, (ax, ax2) = plot.subplots(1, 2, figsize=(8, 4))
 
 # Tkinter app
 frame = tk.Frame(window)
@@ -31,8 +34,7 @@ gpas, hours = Util.get_data_info()
 gpas = Util.dict_to_pairs(gpas)
 hours = Util.dict_to_pairs(hours)
 
-for gpa in gpas:
-    ax.scatter(gpa[1], gpa[0])
-canvas.draw()
+ax.scatter(Util.get_xs(gpas), Util.get_ys(gpas), c='black')
+ax2.scatter(Util.get_xs(hours), Util.get_ys(hours), c='black')
 
 window.mainloop()
