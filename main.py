@@ -2,13 +2,23 @@ import Util
 import matplotlib.pyplot as plot
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
+from tkinter import messagebox
+
+def on_closing():
+    if messagebox.askokcancel("Quit Program", "Do you want to quit?"):
+        window.quit()
+
+
+# create window
+window = tk.Tk()
+window.state('zoomed')  # full-screen
+window.protocol("WM_DELETE_WINDOW", on_closing)
 
 # initialize Tkinter
-root = tk.Tk()
 figure, ax = plot.subplots()
 
 # Tkinter app
-frame = tk.Frame(root)
+frame = tk.Frame(window)
 label = tk.Label(text="Scatterplot Test")
 label.pack()
 
@@ -22,7 +32,7 @@ gpas = Util.dict_to_pairs(gpas)
 hours = Util.dict_to_pairs(hours)
 
 for gpa in gpas:
-    ax.scatter(gpa[0], gpa[1])
+    ax.scatter(gpa[1], gpa[0])
 canvas.draw()
 
-root.mainloop()
+window.mainloop()
