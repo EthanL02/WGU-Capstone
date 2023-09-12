@@ -18,7 +18,7 @@ window.protocol("WM_DELETE_WINDOW", on_closing)
 
 # initialize Tkinter
 plot.xticks(np.arange(0, 5, 1))
-figure, (ax, ax2) = plot.subplots(1, 2, figsize=(10, 5))
+figure, (scatter_gpa, scatter_hour, hist_gpa) = plot.subplots(1, 3, figsize=(10, 5))
 
 # Tkinter app
 frame = tk.Frame(window)
@@ -37,7 +37,8 @@ gpas = Util.dict_to_pairs(gpas)
 hours = Util.dict_to_pairs(hours)
 
 # data visualization
-ax.plot(Util.get_xs(gpas), Util.get_ys(gpas), 'k.', ms=5)
-ax2.plot(Util.get_xs(hours), Util.get_ys(hours), 'k.', ms=5)
+scatter_gpa.plot(Util.get_xs(gpas), Util.get_ys(gpas), 'k.', ms=5)
+scatter_hour.plot(Util.get_xs(hours), Util.get_ys(hours), 'k.', ms=5)
+plot.hist(Util.get_xs(gpas))
 
 window.mainloop()
