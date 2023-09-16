@@ -1,3 +1,4 @@
+import Create_Graph
 import Util
 import matplotlib.pyplot as plot
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -16,20 +17,11 @@ window = tk.Tk()
 window.state('zoomed')  # full-screen
 window.protocol("WM_DELETE_WINDOW", on_closing)
 
-# initialize Tkinter
-plot.xticks(np.arange(0, 5, 1))
-figure, (scatter_gpa, scatter_hour, hist_gpa) = plot.subplots(1, 3, figsize=(10, 5))
-
 # Tkinter app
 frame = tk.Frame(window)
+Create_Graph.frame = frame
 label = tk.Label(text="Scatterplot Test")
 label.pack()
-
-# canvas initialize
-canvas = FigureCanvasTkAgg(figure, master=frame)
-canvas.get_tk_widget().pack()
-
-frame.pack()
 
 # data extraction
 gpas, hours = Util.get_data_info()
@@ -37,8 +29,10 @@ gpas = Util.dict_to_pairs(gpas)
 hours = Util.dict_to_pairs(hours)
 
 # data visualization
-scatter_gpa.plot(Util.get_xs(gpas), Util.get_ys(gpas), 'k.', ms=5)
-scatter_hour.plot(Util.get_xs(hours), Util.get_ys(hours), 'k.', ms=5)
-plot.hist(Util.get_xs(gpas))
+Create_Graph.scatter(Util.get_xs(gpas), Util.get_ys(gpas))
+Create_Graph.histogram(Util.get_xs(hours))
+pie_data = Util.get_all_occurrence(hours)
+pie_sizes = Util.get_percentage_from_occurrence(pie_data)
+Create_Graph.pie_chart(pie_sizes, pie_data.keys())
 
 window.mainloop()
