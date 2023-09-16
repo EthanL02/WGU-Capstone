@@ -19,6 +19,29 @@ def dict_to_pairs(dct):
     return pairs
 
 
+def get_all_occurrence(pairs):
+    out = {}
+
+    for pair in pairs:
+        item = pair[0]
+        if item not in out.keys():
+            out[item] = 1
+        else:
+            out[item] += 1
+    return out
+
+
+def get_percentage_from_occurrence(dct):
+    total = 0
+    out = []
+
+    for val in dct.values():
+        total += val
+    for val in dct.values():
+        out.append(val / total)
+    return out
+
+
 def get_xs(pairs):
     xs = []
 
