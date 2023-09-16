@@ -1,8 +1,7 @@
 import tkinter as tk
-
 import matplotlib.pyplot as plot
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
+from matplotlib.figure import Figure
 
 frame = None
 size = (5, 5)
@@ -31,11 +30,11 @@ def histogram(xax):
 
 
 def pie_chart(sizes, labels):
-    figure, grp = plot.subplots(figsize=size)
+    figure, grp = plot.subplots(1)
+    grp.pie(sizes, labels=labels, autopct="%1.1f%%", pctdistance=.85)
     canvas = FigureCanvasTkAgg(figure, master=frame)
     frame.pack()
 
-    grp.pie(sizes, labels=labels, textprops={'fontsize': 8})
     canvas.get_tk_widget().pack(side=tk.LEFT)
 
-    return grp
+    return grp, canvas
