@@ -19,26 +19,44 @@ def dict_to_pairs(dct):
     return pairs
 
 
-def get_all_occurrence(pairs):
-    out = {}
+def sort_by_y(pairs):
+    for i, left in enumerate(pairs):
+        smallest_val = left
+        smallest_i = i
+        for j, right in enumerate(pairs[i:], start=i):
+            if right[1] < smallest_val[1]:
+                smallest_val = right
+                smallest_i = j
+        if left != smallest_val:
+            pairs[i], pairs[smallest_i] = pairs[smallest_i], pairs[i]
+
+    return pairs
+
+
+def get_pie_chart_from_data(pairs):
+    dct = {}
 
     for pair in pairs:
         item = pair[0]
-        if item not in out.keys():
-            out[item] = 1
+        if item not in dct.keys():
+            dct[item] = 1
         else:
-            out[item] += 1
-    return out
+            dct[item] += 1
 
-
-def get_percentage_from_occurrence(dct):
     total = 0
-    out = []
+    out = [["other", 0]]
 
     for val in dct.values():
         total += val
-    for val in dct.values():
-        out.append(val / total)
+    for key, val in dct.items():
+        perc = val / total
+
+        other_title = 0
+        if perc < .015:
+            out[0][1] += perc
+        else:
+            out.append([key, perc])
+
     return out
 
 
