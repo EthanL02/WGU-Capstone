@@ -25,6 +25,7 @@ def on_pie_select(event):
 
     pie_chart.clear()
     pie_chart.pie(Util.get_ys(data), labels=Util.get_xs(data), autopct="%1.1f%%", pctdistance=.85)
+    pie_chart.set_title(f"Study Hours for GPA: {selected}")
     pie_canvas.draw_idle()
 
 
@@ -51,13 +52,13 @@ label = tk.Label(text="Scatterplot Test")
 label.pack()
 # dynamic ui
 pie_cbox = ttk.Combobox(window, values=Util.get_dict_keys(data_dict), state="readonly")
-pie_cbox.pack()
+pie_cbox.pack(side="top", anchor="e")
 pie_cbox.bind("<<ComboboxSelected>>", on_pie_select)
 
 # data visualization
-Create_Graph.scatter(Util.get_xs(data_pair), Util.get_ys(data_pair))
-Create_Graph.histogram(Util.get_ys(data_pair))
-Create_Graph.histogram(Util.get_xs(data_pair))
+scatter_graph, scatter_canvas = Create_Graph.scatter(Util.get_xs(data_pair), Util.get_ys(data_pair))
+Create_Graph.histogram(Util.get_ys(data_pair), "Study Hours")
+Create_Graph.histogram(Util.get_xs(data_pair), "GPA")
 pie_data = Util.get_pie_chart_from_data(data_pair, True)
 pie_chart, pie_canvas = Create_Graph.pie_chart(Util.get_ys(pie_data), Util.get_xs(pie_data))
 
