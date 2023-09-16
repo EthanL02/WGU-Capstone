@@ -20,6 +20,12 @@ def dict_to_pairs(dct):
 
 
 def sort_by_y(pairs):
+    """
+    sorts an array in ascending order by the y values
+
+    :param pairs: array with format [[x1, y1], [x2, y2],...]
+    :return: sorted array
+    """
     for i, left in enumerate(pairs):
         smallest_val = left
         smallest_i = i
@@ -33,7 +39,16 @@ def sort_by_y(pairs):
     return pairs
 
 
-def get_pie_chart_from_data(pairs):
+def get_pie_chart_from_data(pairs, other=False):
+    """
+    transform array into pie chart readable data
+    records each occurrence of data then translates into percentage
+    percentages too small for the graph are categorized into an 'other' category optionally
+
+    :param other: boolean to combine small data, False by default
+    :param pairs: array of pie chart data in the format [[key1, val2], [key2, val2],...]
+    :return: pie chart readable array in the format [[label1, percentage1], [label2, percentage2],...]
+    """
     dct = {}
 
     for pair in pairs:
@@ -52,10 +67,15 @@ def get_pie_chart_from_data(pairs):
         perc = val / total
 
         other_title = 0
-        if perc < .015:
+        if perc < .015 and other:
+            # data grouped together
             out[0][1] += perc
         else:
             out.append([key, perc])
+
+    if out[0][1] == 0:
+        del out[0]
+    out = sort_by_y(out)
 
     return out
 

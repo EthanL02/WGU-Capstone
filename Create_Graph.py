@@ -35,7 +35,7 @@ def pie_chart(sizes, labels):
     canvas = FigureCanvasTkAgg(figure, master=frame)
     frame.pack()
 
-    grp.pie(sizes, labels=labels)
+    grp.pie(sizes, labels=labels, textprops={'fontsize': 8})
     canvas.get_tk_widget().pack(side=tk.LEFT)
 
     return grp

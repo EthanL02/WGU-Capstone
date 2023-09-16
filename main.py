@@ -31,8 +31,7 @@ hours = Util.dict_to_pairs(hours)
 # data visualization
 Create_Graph.scatter(Util.get_xs(gpas), Util.get_ys(gpas))
 Create_Graph.histogram(Util.get_xs(hours))
-pie_data = Util.get_all_occurrence(hours)
-pie_sizes = Util.get_percentage_from_occurrence(pie_data)
-Create_Graph.pie_chart(pie_sizes, pie_data.keys())
+pie_data = Util.get_pie_chart_from_data(hours)
+Create_Graph.pie_chart(Util.get_ys(pie_data), Util.get_xs(pie_data))
 
 window.mainloop()
