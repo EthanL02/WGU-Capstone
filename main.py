@@ -57,6 +57,13 @@ pie_cbox.bind("<<ComboboxSelected>>", on_pie_select)
 
 # data visualization
 scatter_graph, scatter_canvas = Create_Graph.scatter(Util.get_xs(data_pair), Util.get_ys(data_pair))
+ml_model = np.poly1d(np.polyfit(Util.get_xs(data_pair), Util.get_ys(data_pair), 3))
+ml_line = np.linspace(np.min(Util.get_xs(data_pair)), np.max(Util.get_xs(data_pair)), 100)
+guess_line, = scatter_graph.plot(ml_line, ml_model(ml_line))
+ml_xdata = guess_line.get_xdata()
+ml_ydata = guess_line.get_ydata()
+# np.interp(40, ml_xdata, ml_ydata)     # get suggested hours for given GPA
+
 Create_Graph.histogram(Util.get_ys(data_pair), "Study Hours")
 Create_Graph.histogram(Util.get_xs(data_pair), "GPA")
 pie_data = Util.get_pie_chart_from_data(data_pair, True)
