@@ -1,7 +1,5 @@
 import Create_Graph
 import Util
-import matplotlib.pyplot as plot
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
